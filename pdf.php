@@ -44,6 +44,8 @@ function SetAligns($a)
     $this->aligns = $a;
 }
 
+
+
 function Row($data)
 {
     // Calculate the height of the row
@@ -148,13 +150,16 @@ for($i=1; $i<=5; $i++)
 // Table with 20 rows and  columns
 $pdf->SetWidths(array(30, 20, 40, 30, 40, 40, 20, 60));
 $pdf->Row(array("Name", "Sex", "Position/Designation", "Affiliation", "Mobile Number", "Email Address",
-                "Visiting"));
+                "Visiting", "Sign"));
 
 $pdf->SetFont('Times','',12);
 while($row = $visitors->fetch_assoc()){
     $pdf->Row(array($row["name"], $row["sex"], $row["desig"], $row["affil"], 
                     $row["mobileNum"], $row["emailAdd"], $row["visiting"]));
-    $pdf->Image('assets\logo.png', null, null, 30);
+
+    if ($row["sign"] != null){
+        $pdf->Image($row["sign"], null, null, 30);
+    }
 }                
 
 $pdf->Output();
