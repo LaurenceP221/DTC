@@ -82,30 +82,28 @@ function Row($data)
         $x = $this->GetX();
         $y = $this->GetY();
         // Draw the border
-        $this->Rect($x,$y,$w,$h);
-        // Print the text
-       
+        $this->Rect($x,$y,$w,$h);       
 
         if(substr($data[$i],-3) == 'jpg' || substr($data[$i],-3) == 'png')
-    {
-      $ih = $h - 0.5;
-      $iw = $w - 0.5;
-      $ix = $x + 0.25;
-      $iy = $y + 1;
+        {
+        $ih = $h - 0.5;
+        $iw = $w - 0.5;
+        $ix = $x + 0.25;
+        $iy = $y + 0.25;
 
-      // adjusted display width/height
+        // adjusted display width/height
         $imgw = $this->scaleimage($data[$i], $iw, $ih)[0];
         $imgh = $this->scaleimage($data[$i], $iw, $ih)[1];
 
-      //show image
-      $this->MultiCell($w,5,$this->Image ($data[$i],$ix,$iy,$iw),0,$a);
-    }else
-    {
-      //Print the text
-      $this->MultiCell($w,5,$data[$i],0,$a);
-      // Put the position to the right of the cell
-      $this->SetXY($x+$w,$y);
-    }
+        //show image
+        $this->MultiCell($w, 5, $this->Image($data[$i], $ix, $iy, $imgw, $imgh),0,$a);
+        }else
+        {
+        //Print the text
+        $this->MultiCell($w,5,$data[$i],0,$a);
+        // Put the position to the right of the cell
+        $this->SetXY($x+$w,$y);
+        }
     }
     // Go to the next line
     $this->Ln($h);
@@ -181,11 +179,11 @@ $pdf->AliasNbPages();
 $pdf->AddPage("L", "Legal");
 $pdf->SetFont('Times','B',12);
 
-for($i=1; $i<=40; $i++)
+for($i=1; $i<=5; $i++)
     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
 
 // Table with 20 rows and  columns
-$pdf->SetWidths(array(30, 20, 40, 30, 40, 40, 20, 60));
+$pdf->SetWidths(array(50, 20, 40, 30, 40, 40, 20, 80));
 $pdf->Row(array("Name", "Sex", "Position/Designation", "Affiliation", "Mobile Number", "Email Address",
                 "Visiting", "Sign"));
 
@@ -194,7 +192,6 @@ while($row = $visitors->fetch_assoc()){
     $pdf->Row(array($row["name"], $row["sex"], $row["desig"], $row["affil"], 
                     $row["mobileNum"], $row["emailAdd"], $row["visiting"], $row["sign"]));
 
-    
 }                
 
 $pdf->Output();
