@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visitation Form</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" src="js/jquery.signature.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/jquery.signature.css">
+
+    <style>
+        .kbw-signature {
+            width: 400px;
+            height: 200px;
+        }
+
+        #sig canvas {
+            width: 100% !important;
+            height: auto;
+        }
+        
+        hr.dotted {
+            border-top: 3px dotted #bbb;
+            }
+
+
+    </style>
+
+</head>
+<body>
+
+    <h1 style="text-align:center;">Steer Hub Visitation Form</h1>
+    <hr class="solid">
+
+    <form action="form.php" method="POST">
+
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" class="box" required>
+
+        <fieldset>
+            <legend>Sex</legend>
+
+            <label>
+                <input type="radio" name="sex" value="Male" checked>
+                Male
+            </label>
+
+            <br>
+            <label>
+                <input type="radio" name="sex" value="Female">
+                Female
+            </label>
+
+        </fieldset>
+        
+        <label for="desig">Position/Designation</label>
+        <input type="text" id="desig" name="desig" class="box" required>
+
+        <label for="affil">Affiliation</label>
+        <input type="text" id="affil" name="affil" class="box" required>
+
+        <label for="mobileNum">Mobile Number</label>
+        <input type="text" id="mobileNum" name="mobileNum" class="box" required>
+
+        <label for="emailAdd">Email Address</label>
+        <input type="email" id="emailAdd" name="emailAdd" class="box" required>
+
+        <label for="visting">I am visting:</label>
+        <select id="visiting" name="visiting" required>
+            <option value="DTC">Digital Transformation Center</option>
+            <option value="GADC">GIS Applications Center</option>
+            <option value="ESRC">Electronic Systems Research Center</option>
+            <option value="CTI">Center for Technopreneurship and Innovation</option>
+            <option value="FABLAB">Likha FABLAB</option>
+            <option value="MTCC">Materials Testing and Calibration Center</option>
+        </select>
+
+        <div class="col-md-12">
+            <label class="" for="">Signature:</label>
+            <br />
+            <div id="sig"></div>
+            <br />
+
+            <textarea id="signature64" name="signature" style="display: none"></textarea>
+            <div class="col-12">
+                <button class="btn btn-sm btn-warning" id="clear">&#x232B; Clear Signature</button>
+            </div>
+        </div>
+        <hr class="solid">
+        <br/>
+
+        >
+        <label>
+            <input type="checkbox" name="terms" required>
+            I agree to the terms and conditions
+        </label>
+
+        <br><br>
+
+        <input type="submit" name="submit" value="Submit" style="text-align:center;" class="btn">
+        
+    </form>
+    
+    <script type="text/javascript">
+        var sig = $('#sig').signature({
+            syncField: '#signature64',
+            syncFormat: 'PNG'
+        });
+        $('#clear').click(function(e) {
+            e.preventDefault();
+            sig.signature('clear');
+            $("#signature64").val('');
+        });
+    </script>
+</body>
+</html>
