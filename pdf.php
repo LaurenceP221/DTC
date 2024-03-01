@@ -11,7 +11,7 @@ function Header()
     // Arial bold 15
     $this->SetFont('Times','B',25);
     // Move to the right
-    $this->Cell(125);
+    $this->Cell(135);
     // Title
     $this->Cell(30,20,'Steer Hub Visitation Logbook',0,0,'C');
     // Line break
@@ -136,22 +136,25 @@ function NbLines($w, $txt)
 include('conn.php');
 $visitors = mysqli_query($conn, "SELECT * FROM visitors");
 
-
 // Instanciation of inherited class
 $pdf = new PDF();
 $pdf->AliasNbPages();
-$pdf->AddPage("L");
-$pdf->SetFont('Times','',12);
+$pdf->AddPage("L", "Legal");
+$pdf->SetFont('Times','B',12);
 
 for($i=1; $i<=5; $i++)
     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
 
 // Table with 20 rows and  columns
-$pdf->SetWidths(array(60, 20, 40, 40, 40, 40, 20));
+$pdf->SetWidths(array(30, 20, 40, 30, 40, 40, 20, 60));
 $pdf->Row(array("Name", "Sex", "Position/Designation", "Affiliation", "Mobile Number", "Email Address",
                 "Visiting"));
+
+$pdf->SetFont('Times','',12);
 while($row = $visitors->fetch_assoc()){
-    $pdf->Row(array($row["name"], $row["sex"], $row["desig"], $row["affil"], $row["mobileNum"], 
-                    $row["emailAdd"], $row["visiting"]));
+    $pdf->Row(array($row["name"], $row["sex"], $row["desig"], $row["affil"], 
+                    $row["mobileNum"], $row["emailAdd"], $row["visiting"]));
+    $pdf->Image('assets\logo.png', null, null, 30);
 }                
+
 $pdf->Output();
