@@ -23,12 +23,13 @@ if(isset($_POST['submit'])){
     $file = $folderPath . $name . "_" . uniqid() . '.' . $image_type;
 
     file_put_contents($file, $image_base64);
-    echo "Signature Uploaded Successfully.";
+    
 
     $select = mysqli_query($conn, "INSERT INTO visitors(name, sex, desig, affil, mobileNum, 
             emailAdd, visiting, `sign`) VALUES ('$name','$sex', '$desig', '$affil', 
             '$mobileNum','$emailAdd', '$visiting', '$file')") or die('query failed');
 
+        echo "Signature Uploaded Successfully.";
 
     }
 

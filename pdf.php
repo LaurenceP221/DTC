@@ -171,7 +171,7 @@ function NbLines($w, $txt)
 }
 
 include('conn.php');
-$visitors = mysqli_query($conn, "SELECT * FROM visitors");
+$visitors = mysqli_query($conn, "SELECT * FROM `visitors` WHERE visiting = 'DTC'" );
 
 // Instanciation of inherited class
 $pdf = new PDF();
@@ -183,15 +183,14 @@ for($i=1; $i<=5; $i++)
     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
 
 // Table with 20 rows and  columns
-$pdf->SetWidths(array(50, 20, 40, 30, 40, 40, 20, 80));
+$pdf->SetWidths(array(50, 20, 40, 30, 40, 40, 20, 40, 60));
 $pdf->Row(array("Name", "Sex", "Position/Designation", "Affiliation", "Mobile Number", "Email Address",
-                "Visiting", "Sign"));
+                "Visiting", "Time", "Sign"));
 
 $pdf->SetFont('Times','',12);
 while($row = $visitors->fetch_assoc()){
     $pdf->Row(array($row["name"], $row["sex"], $row["desig"], $row["affil"], 
-                    $row["mobileNum"], $row["emailAdd"], $row["visiting"], $row["sign"]));
-
+                    $row["mobileNum"], $row["emailAdd"], $row["visiting"],$row["time"], $row["sign"]));
 }                
 
 $pdf->Output();
