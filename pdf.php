@@ -171,7 +171,24 @@ function NbLines($w, $txt)
 }
 
 include('conn.php');
-$visitors = mysqli_query($conn, "SELECT * FROM `visitors` WHERE visiting = 'DTC'" );
+$visiting = mysqli_real_escape_string($conn, $_POST['visiting']);
+$period = mysqli_real_escape_string($conn, $_POST['period']);
+
+if ($period== 'today'){
+    $visitors = mysqli_query($conn, "SELECT * FROM `visitors` WHERE visiting = '$visiting' 
+                            AND time = CURRENT_TIMESTAMP" );
+}elseif ($period== "yesterday") {
+    $visitors = mysqli_query($conn, "SELECT * FROM `visitors` WHERE visiting = '$visiting' 
+                            AND time = CURRENT_TIMESTAMP" );
+}elseif ($period== "week") {
+    $visitors = mysqli_query($conn, "SELECT * FROM `visitors` WHERE visiting = '$visiting' 
+                                AND time = CURRENT_TIMESTAMP" );
+}elseif ($period== "all") {
+        $visitors = mysqli_query($conn, "SELECT * FROM `visitors` WHERE visiting = '$visiting'" );
+}
+
+$visitors = mysqli_query($conn, "SELECT * FROM `visitors` WHERE visiting = '$visiting' 
+                        AND time = CURRENT_TIMESTAMP" );
 
 // Instanciation of inherited class
 $pdf = new PDF();
@@ -182,7 +199,7 @@ $pdf->SetFont('Times','B',12);
 for($i=1; $i<=5; $i++)
     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
 
-// Table with 20 rows and  columns
+// Table with 9 columns
 $pdf->SetWidths(array(50, 20, 40, 30, 40, 40, 20, 40, 60));
 $pdf->Row(array("Name", "Sex", "Position/Designation", "Affiliation", "Mobile Number", "Email Address",
                 "Visiting", "Time", "Sign"));
