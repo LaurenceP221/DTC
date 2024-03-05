@@ -176,16 +176,16 @@ $period = mysqli_real_escape_string($conn, $_POST['period']);
 
 if ($period== 'today'){
     $visitors = mysqli_query($conn, "SELECT * FROM `visitors` WHERE visiting = '$visiting' 
-                            AND time = CURRENT_TIMESTAMP" );
+                            AND time BETWEEN CURDATE() AND NOW()");
 }elseif ($period== "yesterday") {
     $visitors = mysqli_query($conn, "SELECT * FROM `visitors` WHERE visiting = '$visiting' 
-                            AND time BETWEEN DATE_SUB(NOW(), INTERVAL 1 DAY)  AND NOW() " );
+                            AND time BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 DAY)  AND NOW() " );
 }elseif ($period== "week") {
     $visitors = mysqli_query($conn, "SELECT * FROM `visitors` WHERE visiting = '$visiting' 
-                                AND time BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY)  AND NOW() " );
+                            AND time BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY)  AND NOW() " );
 }elseif ($period== "month") {
     $visitors = mysqli_query($conn, "SELECT * FROM `visitors` WHERE visiting = '$visiting' 
-                                AND time BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY)  AND NOW() " );
+                            AND time BETWEEN DATE_SUB(CURDATE(), INTERVAL 30 DAY)  AND NOW() " );
 }elseif ($period== "all") {
         $visitors = mysqli_query($conn, "SELECT * FROM `visitors` WHERE visiting = '$visiting'" );
 }else{
@@ -202,7 +202,7 @@ for($i=1; $i<=5; $i++)
     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
 
 // Table with 9 columns
-$pdf->SetWidths(array(50, 20, 40, 30, 40, 40, 20, 40, 60));
+$pdf->SetWidths(array(50, 20, 40, 30, 40, 40, 20, 60, 40));
 $pdf->Row(array("Name", "Sex", "Position/Designation", "Affiliation", "Mobile Number", "Email Address",
                 "Visiting", "Time", "Sign"));
 
