@@ -198,9 +198,6 @@ $pdf->AliasNbPages();
 $pdf->AddPage("L", "Legal");
 $pdf->SetFont('Times','B',12);
 
-for($i=1; $i<=5; $i++)
-    $pdf->Cell(0,10,'Printing line number '.$i,0,1);
-
 // Table with 9 columns
 $pdf->SetWidths(array(50, 20, 40, 30, 40, 40, 20, 60, 40));
 $pdf->Row(array("Name", "Sex", "Position/Designation", "Affiliation", "Mobile Number", "Email Address",

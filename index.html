@@ -110,6 +110,8 @@
                 <option value="CTI">Center for Technopreneurship and Innovation</option>
                 <option value="FABLAB">Likha FABLAB</option>
                 <option value="MTCC">Materials Testing and Calibration Center</option>
+                <option value="CIEE">Center for Innovation in Engineering Education</option>
+                <option value="PYTHOS">PYTHOS Inc.</option>
             </select>
             <div class="invalid-feedback">
                 Please select the department you are visiting.
@@ -154,37 +156,7 @@
         
     </footer>
 
-    <script type="text/javascript">
-        //JS code for signature box
-        var sig = $('#sig').signature({
-            syncField: '#signature64',
-            syncFormat: 'PNG'
-        });
-        $('#clear').click(function(e) {
-            e.preventDefault();
-            sig.signature('clear');
-            $("#signature64").val('');
-        });
-
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (() => {
-        'use strict'
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        const forms = document.querySelectorAll('.needs-validation')
-
-        // Loop over them and prevent submission
-        Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-            if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-            }
-
-            form.classList.add('was-validated')
-            }, false)
-        })
-        })()
+    <script src="js\script.js"></script>
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
