@@ -32,7 +32,7 @@ if(isset($_POST['submit'])){
 
     echo "Signature Uploaded Successfully.";}?>
     <br/><h1>
-        <a href="mainForm.html">Create a new entry</a>
+        <a href="index.html">Create a new entry</a>
     </h1>
     
 
