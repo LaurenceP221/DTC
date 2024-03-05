@@ -183,6 +183,9 @@ if ($period== 'today'){
 }elseif ($period== "week") {
     $visitors = mysqli_query($conn, "SELECT * FROM `visitors` WHERE visiting = '$visiting' 
                                 AND time BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY)  AND NOW() " );
+}elseif ($period== "month") {
+    $visitors = mysqli_query($conn, "SELECT * FROM `visitors` WHERE visiting = '$visiting' 
+                                AND time BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY)  AND NOW() " );
 }elseif ($period== "all") {
         $visitors = mysqli_query($conn, "SELECT * FROM `visitors` WHERE visiting = '$visiting'" );
 }else{
